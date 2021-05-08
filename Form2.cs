@@ -13,7 +13,7 @@ namespace TimeTracker
 {
     public partial class Form2 : Form
     {
-        DateTime start;
+        readonly DateTime start;
 
         public List<Process> Processes { get; private set; }
 
@@ -21,9 +21,10 @@ namespace TimeTracker
         
         public Form2()
         {
+            start = DateTime.UtcNow;
+            
             InitializeComponent();
             panel1.AutoScroll = true;
-            start = DateTime.UtcNow;
             TimeElapsed();
         }
 
@@ -49,6 +50,9 @@ namespace TimeTracker
             }
         }
 
+        /// <summary>
+        /// Creates a timer that will update every second.
+        /// </summary>
         private void TimeElapsed()
         {
             var timer = new Timer
@@ -66,6 +70,10 @@ namespace TimeTracker
             var minutes = timeDifference.Minutes;
             var seconds = timeDifference.Seconds;
             label2.Text = $"{hours:00}:{minutes:00}:{seconds:00}";
+
+            // TODO:
+            // as well as updating the time, should add an update to the running processes
+            // that updates the progress bar
         }
     }
 }

@@ -11,16 +11,30 @@ namespace TimeTracker
 {
     public class Process
     {
+        /// <summary>
+        /// Gets the process name
+        /// </summary>
         string ProcessName { get; }
 
+        /// <summary>
+        /// Gets the processes controls
+        /// </summary>
         ControlCollection Controls { get; }
 
+        /// <summary>
+        /// Gets the location of the label
+        /// </summary>
         Point Location { get; }
 
         Label ProcessLabel;
-
         ProgressBar ProcessBar;
 
+        /// <summary>
+        /// Creates tracking information with the given process name, panel controls and the location.
+        /// </summary>
+        /// <param name="processName">The process name</param>
+        /// <param name="controls">The controls for the process</param>
+        /// <param name="location">The location of the components</param>
         public Process(string processName, ControlCollection controls, Point location)
         {
             ProcessName = processName;
@@ -34,6 +48,9 @@ namespace TimeTracker
             return ProcessBar.Size.Height;
         }
 
+        /// <summary>
+        /// Renders Process name label and progress bar
+        /// </summary>
         private void InstantiateTracking()
         {
             ProcessLabel = new Label
@@ -53,7 +70,6 @@ namespace TimeTracker
 
             Controls.Add(ProcessBar);
             Controls.Add(ProcessLabel);
-
         }
 
     }
