@@ -1,0 +1,11 @@
+D:\Projects\C-Sharp\TimeTracker\bin\Debug\TimeTracker.exe.config
+D:\Projects\C-Sharp\TimeTracker\bin\Debug\TimeTracker.exe
+D:\Projects\C-Sharp\TimeTracker\bin\Debug\TimeTracker.pdb
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.csprojAssemblyReference.cache
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.Form1.resources
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.Properties.Resources.resources
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.csproj.GenerateResource.cache
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.csproj.CoreCompileInputs.cache
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.exe
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.pdb
+D:\Projects\C-Sharp\TimeTracker\obj\Debug\TimeTracker.Form2.resources
