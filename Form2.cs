@@ -17,7 +17,7 @@ namespace TimeTracker
 
         public List<Process> Processes { get; private set; }
 
-        private Point InitialPoint = new Point(200, 80);
+        private Point InitialPoint = new Point(20, 20);
         
         public Form2()
         {
@@ -29,22 +29,24 @@ namespace TimeTracker
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Processes is null)
+            var localAll = System.Diagnostics.Process.GetProcesses().Take(20);
+            foreach (var process in localAll)
             {
-                Processes = new List<Process>
+                if (Processes is null)
                 {
-                    new Process("Process #1", Controls, InitialPoint)
-                };
-            }
-            else
-            {
-                var proc = Processes.ElementAt(Processes.Count() - 1);
+                    Processes = new List<Process>
+                    {
+                        new Process(process.ProcessName, panel1.Controls, InitialPoint)
+                    };
+                }
+                else
+                {
+                    var proc = Processes.ElementAt(Processes.Count() - 1);
 
-                InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + proc.GetProcessBarHeight() + 5);
-                Processes.Add(new Process($"Process #{Processes.Count() + 1}", Controls, InitialPoint));
+                    InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + proc.GetProcessBarHeight() + 5);
+                    Processes.Add(new Process(process.ProcessName, panel1.Controls, InitialPoint));
+                }
             }
-
-            
         }
 
         private void TimeElapsed()

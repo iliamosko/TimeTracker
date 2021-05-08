@@ -33,15 +33,15 @@ namespace TimeTracker
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(319, 367);
+            this.button1.Location = new System.Drawing.Point(380, 368);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -69,37 +69,40 @@ namespace TimeTracker
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.progressBar3);
-            this.panel1.Controls.Add(this.progressBar2);
-            this.panel1.Controls.Add(this.progressBar1);
-            this.panel1.Location = new System.Drawing.Point(410, 211);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(160, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(408, 227);
+            this.panel1.Size = new System.Drawing.Size(516, 294);
             this.panel1.TabIndex = 5;
             // 
-            // progressBar3
+            // label3
             // 
-            this.progressBar3.Location = new System.Drawing.Point(46, 179);
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(317, 23);
-            this.progressBar3.TabIndex = 2;
-            this.progressBar3.Value = 21;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(41, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Process Name";
             // 
-            // progressBar2
+            // label4
             // 
-            this.progressBar2.Location = new System.Drawing.Point(46, 150);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(300, 20);
-            this.progressBar2.TabIndex = 1;
-            this.progressBar2.Value = 54;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(217, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Usage";
             // 
-            // progressBar1
+            // label5
             // 
-            this.progressBar1.Location = new System.Drawing.Point(46, 71);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(317, 23);
-            this.progressBar1.TabIndex = 0;
-            this.progressBar1.Value = 32;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(434, 4);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Time";
             // 
             // Form2
             // 
@@ -113,6 +116,7 @@ namespace TimeTracker
             this.Name = "Form2";
             this.Text = "Form2";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,8 +127,8 @@ namespace TimeTracker
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ProgressBar progressBar3;
-        private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
