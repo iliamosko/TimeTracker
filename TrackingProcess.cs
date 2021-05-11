@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,12 @@ using static System.Windows.Forms.Control;
 
 namespace TimeTracker
 {
-    public class Process
+    public class TrackingProcess
     {
+        /// <summary>
+        /// Gets the process
+        /// </summary>
+        public Process Process { get; }
         /// <summary>
         /// Gets the process name
         /// </summary>
@@ -30,14 +35,15 @@ namespace TimeTracker
         ProgressBar ProcessBar;
 
         /// <summary>
-        /// Creates tracking information with the given process name, panel controls and the location.
+        /// Creates tracking information with the given process, panel controls and the location.
         /// </summary>
-        /// <param name="processName">The process name</param>
+        /// <param name="process">The process.</param>
         /// <param name="controls">The controls for the process</param>
         /// <param name="location">The location of the components</param>
-        public Process(string processName, ControlCollection controls, Point location)
+        public TrackingProcess(Process process, ControlCollection controls, Point location)
         {
-            ProcessName = processName;
+            Process = process;
+            ProcessName = process.ProcessName;
             Controls = controls;
             Location = location;
             InstantiateTracking();
@@ -46,6 +52,16 @@ namespace TimeTracker
         public int GetProcessBarHeight()
         {
             return ProcessBar.Size.Height;
+        }
+
+        public void SetValue(int value)
+        {
+            ProcessBar.Value = value;
+        }
+
+        public int GetValue()
+        {
+            return ProcessBar.Value;
         }
 
         /// <summary>
