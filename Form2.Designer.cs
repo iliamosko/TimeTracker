@@ -29,25 +29,14 @@ namespace TimeTracker
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(380, 368);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -77,14 +66,14 @@ namespace TimeTracker
             this.panel1.Size = new System.Drawing.Size(516, 294);
             this.panel1.TabIndex = 5;
             // 
-            // label3
+            // label5
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Process Name";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(434, 4);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Time";
             // 
             // label4
             // 
@@ -95,14 +84,14 @@ namespace TimeTracker
             this.label4.TabIndex = 1;
             this.label4.Text = "Usage";
             // 
-            // label5
+            // label3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(434, 4);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Time";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(41, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Process Name";
             // 
             // Form2
             // 
@@ -112,7 +101,6 @@ namespace TimeTracker
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
             this.Name = "Form2";
             this.Text = "Form2";
             this.panel1.ResumeLayout(false);
@@ -123,7 +111,6 @@ namespace TimeTracker
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;

@@ -16,16 +16,11 @@ namespace TimeTracker
     {
         readonly DateTime start;
 
-        private List<string> knownProcesses = new List<string>
-        {
-            "Skype", "Discord", "Battle.net", "steam", "mspaint", "paint"
-        };
-
         public List<TrackingProcess> Processes { get; private set; }
 
         private Point InitialPoint = new Point(20, 20);
 
-        private bool rendered = false;
+        private TrackingProcess currentActiveProcess;
 
         [DllImport("user32.dll")]
         static extern IntPtr GetForegroundWindow();
@@ -41,41 +36,6 @@ namespace TimeTracker
             TimeElapsed();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var allProcesses = Process.GetProcesses();
-            var localAll = allProcesses.Where(process => knownProcesses.Any(process2 => process2.Equals(process.ProcessName)));
-            foreach (var process in localAll)
-            {
-                if (Processes is null)
-                {
-                    Processes = new List<TrackingProcess>
-                    {
-                        new TrackingProcess(process, panel1.Controls, InitialPoint)
-                    };
-                }
-                else
-                {
-                    var proc = Processes.ElementAt(Processes.Count() - 1);
-
-                    InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + proc.GetProcessBarHeight() + 5);
-                    Processes.Add(new TrackingProcess(process, panel1.Controls, InitialPoint));
-                }
-            }
-        }
-
-        public void UpdateProcesses()
-        {
-            var currentWindow = GetActiveWindowTitle();
-            Debug.WriteLine(currentWindow);
-            var tmp = Processes.FirstOrDefault(proc => currentWindow.Contains(proc.Process.ProcessName));
-            if (!(tmp is null))
-            {
-                var val = tmp.GetValue();
-                tmp.SetValue(++val);
-            }
-        }
-
         /// <summary>
         /// Creates a timer that will update every second.
         /// </summary>
@@ -88,6 +48,7 @@ namespace TimeTracker
             timer.Tick += new EventHandler(UpdateTime);
             timer.Start();
         }
+
         private void UpdateTime(object sender, EventArgs e)
         {
             var currentTime = DateTime.UtcNow;
@@ -100,16 +61,66 @@ namespace TimeTracker
             // TODO:
             // as well as updating the time, should add an update to the running processes
             // that updates the progress bar
+            TrackProcess();
+        }
 
-            if (!rendered)
+        private void TrackProcess()
+        {
+            var activeProcess = GetActiveWindowTitle();
+
+
+            if (Processes is null)
             {
-                button1_Click(sender, e);
-                rendered = true;
+                var process = new TrackingProcess(activeProcess, panel1.Controls, InitialPoint);
+                Processes = new List<TrackingProcess>
+                {
+                    process
+                };
+                currentActiveProcess = process;
+            }
+            else if (!Processes.Exists(proc => proc.ProcessName.Equals(activeProcess)))
+            {
+                InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + Processes.LastOrDefault().GetProcessBarHeight() + 5);
+                var process = new TrackingProcess(activeProcess, panel1.Controls, InitialPoint);
+                Processes.Add(process);
+                currentActiveProcess = process;
             }
             else
             {
-                UpdateProcesses();
+                UpdateProcesses(activeProcess);
             }
+        }
+
+        public void UpdateProcesses(string currentWindow)
+        {
+            Debug.WriteLine(currentWindow);
+
+            if(currentActiveProcess.ProcessName == currentWindow)
+            {
+                //keep adding time to total usage
+                var process = Processes.FirstOrDefault(proc => currentWindow.Contains(proc.ProcessName));
+                if (!(process is null))
+                {
+                    process.UpdateTime();
+                    var val = process.GetValue();
+                    process.SetValue(--val);
+                }
+            }
+            else
+            {
+                currentActiveProcess.StopStopwatch();
+                var process = Processes.FirstOrDefault(proc => currentWindow.Contains(proc.ProcessName));
+                //switch process to new active process and beging counting time
+                currentActiveProcess = process;
+                currentActiveProcess.StartStopwatch();
+                if (!(process is null))
+                {
+                    process.UpdateTime();
+                    var val = process.GetValue();
+                    process.SetValue(--val);
+                }
+            }
+           
         }
 
         private string GetActiveWindowTitle()

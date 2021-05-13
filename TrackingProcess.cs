@@ -13,16 +13,12 @@ namespace TimeTracker
     public class TrackingProcess
     {
         /// <summary>
-        /// Gets the process
-        /// </summary>
-        public Process Process { get; }
-        /// <summary>
         /// Gets the process name
         /// </summary>
-        string ProcessName { get; }
+        public string ProcessName { get; }
 
         /// <summary>
-        /// Gets the processes controls
+        /// Gets the process controls
         /// </summary>
         ControlCollection Controls { get; }
 
@@ -31,21 +27,26 @@ namespace TimeTracker
         /// </summary>
         Point Location { get; }
 
+        // NOTE:
+        // Stopewatch does not match timer in From2 class. Should change it to timer to match the total time.
+        public Stopwatch Stopwatch { get; }
+
         Label ProcessLabel;
+        Label TimeSpent;
         ProgressBar ProcessBar;
 
         /// <summary>
-        /// Creates tracking information with the given process, panel controls and the location.
+        /// Creates tracking information with the given process name, panel controls and the location.
         /// </summary>
         /// <param name="process">The process.</param>
         /// <param name="controls">The controls for the process</param>
         /// <param name="location">The location of the components</param>
-        public TrackingProcess(Process process, ControlCollection controls, Point location)
+        public TrackingProcess(string processName, ControlCollection controls, Point location)
         {
-            Process = process;
-            ProcessName = process.ProcessName;
+            ProcessName = processName;
             Controls = controls;
             Location = location;
+            Stopwatch = new Stopwatch();
             InstantiateTracking();
         }
 
@@ -64,6 +65,26 @@ namespace TimeTracker
             return ProcessBar.Value;
         }
 
+        public void UpdateProcess(int value)
+        {
+            SetValue(value);
+        }
+
+        public void StartStopwatch()
+        {
+            Stopwatch.Start();
+        }
+
+        public void StopStopwatch()
+        {
+            Stopwatch.Stop();
+        }
+
+        public void UpdateTime()
+        {
+            TimeSpent.Text = $"{Stopwatch.Elapsed.Hours:00}:{Stopwatch.Elapsed.Minutes:00}:{Stopwatch.Elapsed.Seconds:00}";
+        }
+
         /// <summary>
         /// Renders Process name label and progress bar
         /// </summary>
@@ -80,12 +101,22 @@ namespace TimeTracker
             {
                 Location = new Point(Location.X + ProcessLabel.Size.Width, Location.Y),
                 Size = new Size(300, 20),
-                Value = 10,
+                Value = 100,
                 AutoSize = true
             };
 
+            TimeSpent = new Label
+            {
+                Location = new Point(ProcessBar.Location.X + ProcessBar.Size.Width + 10, Location.Y),
+                Text = $"00:00:00",
+                AutoSize = true
+            };
+
+
             Controls.Add(ProcessBar);
             Controls.Add(ProcessLabel);
+            Controls.Add(TimeSpent);
+            StartStopwatch();
         }
 
     }
