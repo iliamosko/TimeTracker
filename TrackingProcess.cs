@@ -20,20 +20,20 @@ namespace TimeTracker
         /// <summary>
         /// Gets the process controls
         /// </summary>
-        ControlCollection Controls { get; }
+        private ControlCollection Controls { get; }
 
         /// <summary>
         /// Gets the location of the label
         /// </summary>
-        Point Location { get; }
+        private Point Location { get; }
 
         // NOTE:
         // Stopewatch does not match timer in From2 class. Should change it to timer to match the total time.
-        public Stopwatch Stopwatch { get; }
+        private Stopwatch Stopwatch { get; }
 
-        Label ProcessLabel;
-        Label TimeSpent;
-        ProgressBar ProcessBar;
+        private Label ProcessLabel;
+        private Label TimeSpent;
+        private ProgressBar ProcessBar;
 
         /// <summary>
         /// Creates tracking information with the given process name, panel controls and the location.
@@ -118,6 +118,22 @@ namespace TimeTracker
             Controls.Add(TimeSpent);
             StartStopwatch();
         }
+
+        // Method that updates the progress bar
+        private void UpdateBar()
+        {
+
+        }
+
+        // Method that updates the current time that has been spent on an application/process
+        private void UpdateTimeUsage()
+        {
+
+        }
+
+
+
+
 
     }
 }
