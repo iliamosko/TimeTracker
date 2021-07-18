@@ -13,7 +13,7 @@ namespace TimeTracker
 {
     public static class ProcessTracker
     {
-        private static ProcessUpdater ProcessUpdater;
+        private static ProcessUpdater ProcessUpdater { get; set; }
         private static Point InitialPoint = new Point(20, 20);
         private static TrackingProcess currentActiveProcess;
         private static ControlCollection panelControls;
@@ -23,28 +23,20 @@ namespace TimeTracker
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
-        public static void SetupTracking(Panel mainPanel)
+        public static void SetupTracking(Panel mainPanel, ProcessUpdater procUpdater)
         {
-            if(!(mainPanel is null))
-            {
-                panelControls = mainPanel.Controls;
-            }
-            else
-            {
-                throw new Exception("No panel");
-            }
-            //Start tracking process
-            TrackProcess();
+            panelControls = mainPanel.Controls ?? throw new Exception("MainPanel controls are null");
+            ProcessUpdater = procUpdater ?? throw new Exception("ProcessUpdater is null");
         }
 
-        private static void TrackProcess()
+        public static void TrackProcess()
         {
-            ProcessUpdater = new ProcessUpdater();
+
             var activeProcess = GetActiveWindowTitle();
 
             if (!ProcessUpdater.ContainsProcesses())
             {
-                AddProcessToList(activeProcess);
+                AddProcessToList(activeProcess,false);
             }
             else if(!ProcessUpdater.HasProcess(activeProcess))
             {
@@ -91,13 +83,13 @@ namespace TimeTracker
             {
                 InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + ProcessUpdater.LastAddedProcess().GetProcessBarHeight() + 5);
                 var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
-                ProcessUpdater.Add(process);
+                ProcessUpdater.AddProcess(process);
                 currentActiveProcess = process;
             }
             else
             {
                 var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
-                ProcessUpdater.Add(process);
+                ProcessUpdater.AddProcess(process);
                 currentActiveProcess = process;
             }
         }

@@ -16,13 +16,17 @@ namespace TimeTracker
     {
         readonly DateTime start;
 
+        private static ProcessUpdater ProcessUpdater;
+
         public Form2()
         {
             start = DateTime.UtcNow;
             
             InitializeComponent();
             panel1.AutoScroll = true;
+            ProcessUpdater = new ProcessUpdater();
             TimeElapsed();
+            ProcessTracker.SetupTracking(panel1, ProcessUpdater);
         }
 
         /// <summary>
@@ -50,8 +54,7 @@ namespace TimeTracker
             // TODO:
             // as well as updating the time, should add an update to the running processes
             // that updates the progress bar
-            //TrackProcess();
-            ProcessTracker.SetupTracking(panel1);
+            ProcessTracker.TrackProcess();
         }
     }
 }

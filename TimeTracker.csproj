@@ -58,7 +58,8 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProcessTracking.cs" />
+    <Compile Include="ProcessTracker.cs" />
+    <Compile Include="ProcessUpdater.cs" />
     <Compile Include="TrackingProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

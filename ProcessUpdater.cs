@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TimeTracker
 {
-    class ProcessUpdater
+    public class ProcessUpdater
     {
         private List<TrackingProcess> Processes { get; set; }
 
@@ -20,7 +20,7 @@ namespace TimeTracker
         /// Add a process to track
         /// </summary>
         /// <param name="proc">The process to track</param>
-        public void Add(TrackingProcess proc)
+        public void AddProcess(TrackingProcess proc)
         {
             if (!(proc is null))
             {
