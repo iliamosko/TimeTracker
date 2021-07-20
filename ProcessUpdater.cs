@@ -11,6 +11,8 @@ namespace TimeTracker
     {
         private List<TrackingProcess> Processes { get; set; }
 
+        private TrackingProcess CurrentActiveProcess;
+
         public ProcessUpdater()
         {
             Processes = new List<TrackingProcess>();
@@ -59,6 +61,25 @@ namespace TimeTracker
             }
 
             return Processes.LastOrDefault();
+        }
+
+        public void SetActiveProcess(TrackingProcess proc)
+        {
+            if(CurrentActiveProcess is null)
+            {
+                CurrentActiveProcess = proc;
+                proc.StartStopwatch();
+            }
+            else
+            {
+                // Make sure currentActiveProcess switches 
+            }
+
+        }
+
+        public TrackingProcess GetCurrentActiveProcess()
+        {
+            return CurrentActiveProcess ?? throw new Exception("No active process");
         }
 
         /// <summary>

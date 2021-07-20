@@ -31,7 +31,6 @@ namespace TimeTracker
 
         public static void TrackProcess()
         {
-
             var activeProcess = GetActiveWindowTitle();
 
             if (!ProcessUpdater.ContainsProcesses())
@@ -84,17 +83,15 @@ namespace TimeTracker
                 InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + ProcessUpdater.LastAddedProcess().GetProcessBarHeight() + 5);
                 var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
                 ProcessUpdater.AddProcess(process);
-                currentActiveProcess = process;
+                ProcessUpdater.SetActiveProcess(process);
             }
             else
             {
                 var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
                 ProcessUpdater.AddProcess(process);
-                currentActiveProcess = process;
+                ProcessUpdater.SetActiveProcess(process);
             }
         }
-
-
 
         private static string GetActiveWindowTitle()
         {
