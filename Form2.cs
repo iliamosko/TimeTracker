@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TimeTracker
@@ -17,6 +8,8 @@ namespace TimeTracker
         readonly DateTime start;
 
         private static ProcessUpdater ProcessUpdater;
+
+        public static TimeSpan TimeDifference;
 
         public Form2()
         {
@@ -45,15 +38,12 @@ namespace TimeTracker
         private void UpdateTime(object sender, EventArgs e)
         {
             var currentTime = DateTime.UtcNow;
-            var timeDifference = currentTime - start;
-            var hours = timeDifference.Hours;
-            var minutes = timeDifference.Minutes;
-            var seconds = timeDifference.Seconds;
+            TimeDifference = currentTime - start;
+            var hours = TimeDifference.Hours;
+            var minutes = TimeDifference.Minutes;
+            var seconds = TimeDifference.Seconds;
             label2.Text = $"{hours:00}:{minutes:00}:{seconds:00}";
 
-            // TODO:
-            // as well as updating the time, should add an update to the running processes
-            // that updates the progress bar
             ProcessTracker.TrackProcess();
         }
     }

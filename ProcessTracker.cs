@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 
@@ -52,28 +49,18 @@ namespace TimeTracker
         {
             Debug.WriteLine(currentWindow);
 
-            /*if (currentActiveProcess.ProcessName == currentWindow)
+            if(ProcessUpdater.GetCurrentActiveProcess().ProcessName != currentWindow)
             {
-                //keep adding time to total usage
-                if (!(currentActiveProcess is null))
-                {
-                    currentActiveProcess.UpdateTime();
-                    var val = currentActiveProcess.GetValue();
-                }
+                currentActiveProcess = ProcessUpdater.GetProcess(currentWindow);
+                ProcessUpdater.SetActiveProcess(currentActiveProcess);
+                currentActiveProcess.UpdateTime();
             }
             else
             {
-                currentActiveProcess.StopStopwatch();
-                var process = Processes.FirstOrDefault(proc => currentWindow.Contains(proc.ProcessName));
-                //switch process to new active process and begin counting time
-                currentActiveProcess = process;
-                currentActiveProcess.StartStopwatch();
-                if (!(process is null))
-                {
-                    process.UpdateTime();
-                    var val = process.GetValue();
-                }
-            }*/
+
+                currentActiveProcess = ProcessUpdater.GetCurrentActiveProcess();
+                currentActiveProcess.UpdateTime();
+            }
         }
 
         private static void AddProcessToList(string ProcessName, bool newProcess = false)
@@ -83,13 +70,11 @@ namespace TimeTracker
                 InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + ProcessUpdater.LastAddedProcess().GetProcessBarHeight() + 5);
                 var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
                 ProcessUpdater.AddProcess(process);
-                ProcessUpdater.SetActiveProcess(process);
             }
             else
             {
                 var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
                 ProcessUpdater.AddProcess(process);
-                ProcessUpdater.SetActiveProcess(process);
             }
         }
 

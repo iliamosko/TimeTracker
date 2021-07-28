@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TimeTracker
 {
@@ -27,6 +24,7 @@ namespace TimeTracker
             if (!(proc is null))
             {
                 Processes.Add(proc);
+                SetActiveProcess(proc);
             }
             else
             {
@@ -49,6 +47,17 @@ namespace TimeTracker
             return false;
         }
 
+        public TrackingProcess GetProcess(string proc)
+        {
+            var foundProcess = Processes.FirstOrDefault(process => process.ProcessName.Equals(proc));
+
+            if(foundProcess is null)
+            {
+                throw new ArgumentNullException("There is no such process");
+            }
+            return foundProcess;
+        }
+
         /// <summary>
         /// Returns the last index in the list of processes
         /// </summary>
@@ -63,18 +72,29 @@ namespace TimeTracker
             return Processes.LastOrDefault();
         }
 
+        /// <summary>
+        /// Sets the current active process. Starts and stops the <see cref="TrackingProcess.Stopwatch"/> to the respective process
+        /// whenever the focus is switched.
+        /// </summary>
+        /// <param name="proc">The current active <see cref="TrackingProcess"/></param>
         public void SetActiveProcess(TrackingProcess proc)
         {
             if(CurrentActiveProcess is null)
             {
                 CurrentActiveProcess = proc;
-                proc.StartStopwatch();
+                CurrentActiveProcess.StartStopwatch();
+            }
+            else if (CurrentActiveProcess.ProcessName != proc.ProcessName)
+            {
+                CurrentActiveProcess.StopStopwatch();
+                CurrentActiveProcess = proc;
+                CurrentActiveProcess.StartStopwatch();
             }
             else
             {
-                // Make sure currentActiveProcess switches 
+                CurrentActiveProcess.StopStopwatch();
+                CurrentActiveProcess = proc;
             }
-
         }
 
         public TrackingProcess GetCurrentActiveProcess()

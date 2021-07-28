@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 
@@ -55,19 +51,9 @@ namespace TimeTracker
             return ProcessBar.Size.Height;
         }
 
-        public void SetValue(int value)
+        public void SetProgressBarValue(int value)
         {
             ProcessBar.Value = value;
-        }
-
-        public int GetValue()
-        {
-            return ProcessBar.Value;
-        }
-
-        public void UpdateProcess(int value)
-        {
-            SetValue(value);
         }
 
         public void StartStopwatch()
@@ -82,9 +68,19 @@ namespace TimeTracker
 
         public void UpdateTime()
         {
-            TimeSpent.Text = $"{Stopwatch.Elapsed.Hours:00}:{Stopwatch.Elapsed.Minutes:00}:{Stopwatch.Elapsed.Seconds:00}";
+            // When updatating time there is a lag of ~1 second, even when switching processes.
+            TimeSpent.Text = $"{Stopwatch.Elapsed.Hours:00}:{Stopwatch.Elapsed.Minutes:00}:{Math.Ceiling((decimal)Stopwatch.Elapsed.Seconds):00}";
+            UpdateProgressBar();
         }
 
+        private void UpdateProgressBar()
+        {
+            Debug.WriteLine(Form2.TimeDifference);
+            Debug.WriteLine("Total percentage of usage:" + Convert.ToInt32(Stopwatch.Elapsed.TotalMilliseconds/Form2.TimeDifference.TotalMilliseconds * 100));
+            SetProgressBarValue(Convert.ToInt32(Stopwatch.Elapsed.TotalMilliseconds / Form2.TimeDifference.TotalMilliseconds * 100));
+
+
+        }
         /// <summary>
         /// Renders Process name label and progress bar
         /// </summary>
@@ -101,7 +97,7 @@ namespace TimeTracker
             {
                 Location = new Point(Location.X + ProcessLabel.Size.Width, Location.Y),
                 Size = new Size(300, 20),
-                Value = 100,
+                Value = 0,
                 AutoSize = true
             };
 
@@ -116,19 +112,6 @@ namespace TimeTracker
             Controls.Add(ProcessBar);
             Controls.Add(ProcessLabel);
             Controls.Add(TimeSpent);
-            StartStopwatch();
-        }
-
-        // Method that updates the progress bar
-        private void UpdateBar()
-        {
-
-        }
-
-        // Method that updates the current time that has been spent on an application/process
-        private void UpdateTimeUsage()
-        {
-
         }
     }
 }
