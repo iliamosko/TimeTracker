@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace TimeTracker
 {
-    public partial class Form1 : Form
+    public partial class Landing : Form
     {
-        public Form1()
+        public Landing()
         {
             InitializeComponent();
         }
@@ -18,7 +18,7 @@ namespace TimeTracker
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var form2 = new Form2();
+            var form2 = new Tracking();
             form2.Show();
         }
 

@@ -1,7 +1,7 @@
 ﻿
 namespace TimeTracker
 {
-    partial class Form2
+    partial class Tracking
     {
         /// <summary>
         /// Required designer variable.
@@ -101,8 +101,8 @@ namespace TimeTracker
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "My Tracking Application";
+            this.Text = "My Tracking Application";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

@@ -75,9 +75,9 @@ namespace TimeTracker
 
         private void UpdateProgressBar()
         {
-            Debug.WriteLine(Form2.TimeDifference);
-            Debug.WriteLine("Total percentage of usage:" + Convert.ToInt32(Stopwatch.Elapsed.TotalMilliseconds/Form2.TimeDifference.TotalMilliseconds * 100));
-            SetProgressBarValue(Convert.ToInt32(Stopwatch.Elapsed.TotalMilliseconds / Form2.TimeDifference.TotalMilliseconds * 100));
+            Debug.WriteLine(Tracking.TimeDifference);
+            Debug.WriteLine("Total percentage of usage:" + Convert.ToInt32(Stopwatch.Elapsed.TotalMilliseconds/Tracking.TimeDifference.TotalMilliseconds * 100));
+            SetProgressBarValue(Convert.ToInt32(Stopwatch.Elapsed.TotalMilliseconds / Tracking.TimeDifference.TotalMilliseconds * 100));
 
 
         }

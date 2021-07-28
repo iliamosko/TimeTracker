@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace TimeTracker
 {
-    public partial class Form2 : Form
+    public partial class Tracking : Form
     {
         readonly DateTime start;
 
@@ -11,7 +11,7 @@ namespace TimeTracker
 
         public static TimeSpan TimeDifference;
 
-        public Form2()
+        public Tracking()
         {
             start = DateTime.UtcNow;
             
