@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace TimeTracker
 {
@@ -13,6 +14,7 @@ namespace TimeTracker
         public ProcessUpdater()
         {
             Processes = new List<TrackingProcess>();
+            ProcessTicker();
         }
 
         /// <summary>
@@ -117,6 +119,33 @@ namespace TimeTracker
                 return true;
             }
         }
+
+        private void ProcessTicker()
+        {
+            Timer timer = new Timer
+            {
+                Interval = (1 * 1000) //1 second
+            };
+            timer.Tick += new EventHandler(UpdateProgressHandler);
+            timer.Start();
+        }
+
+        private void UpdateProgressHandler(object sender, EventArgs e)
+        {
+            foreach(var trackingProcess in Processes)
+            {
+                if(!(trackingProcess is null))
+                {
+                    trackingProcess.UpdateTime();
+                }
+            }
+        }
+
+        private void ProcessSwap()
+        {
+
+        }
+
 
     }
 }
