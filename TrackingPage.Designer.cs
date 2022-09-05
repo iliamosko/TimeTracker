@@ -41,14 +41,17 @@
             this.ListPanel = new System.Windows.Forms.Panel();
             this.ProgressBarColumn = new System.Windows.Forms.Panel();
             this.ProgressBarPanel = new System.Windows.Forms.Panel();
+            this.ActiveProgressBarPanel = new System.Windows.Forms.Panel();
             this.ProgressTitlePanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.TimeSpentColumn = new System.Windows.Forms.Panel();
             this.TimeSpentPanel = new System.Windows.Forms.Panel();
+            this.ActiveTimePanel = new System.Windows.Forms.Panel();
             this.TimeSpentTitlePanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.NameColumn = new System.Windows.Forms.Panel();
             this.ProcessNamePanel = new System.Windows.Forms.Panel();
+            this.ActiveTitleNamePanel = new System.Windows.Forms.Panel();
             this.TitlePanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -57,20 +60,14 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.ActiveTimePanel = new System.Windows.Forms.Panel();
-            this.ActiveProgressBarPanel = new System.Windows.Forms.Panel();
-            this.ActiveTitleNamePanel = new System.Windows.Forms.Panel();
             this.navPanel.SuspendLayout();
             this.LogoPanel.SuspendLayout();
             this.ListPanel.SuspendLayout();
             this.ProgressBarColumn.SuspendLayout();
-            this.ProgressBarPanel.SuspendLayout();
             this.ProgressTitlePanel.SuspendLayout();
             this.TimeSpentColumn.SuspendLayout();
-            this.TimeSpentPanel.SuspendLayout();
             this.TimeSpentTitlePanel.SuspendLayout();
             this.NameColumn.SuspendLayout();
-            this.ProcessNamePanel.SuspendLayout();
             this.TitlePanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
             this.TopPanel.SuspendLayout();
@@ -192,6 +189,7 @@
             // 
             // ProgressBarColumn
             // 
+            this.ProgressBarColumn.Controls.Add(this.ActiveProgressBarPanel);
             this.ProgressBarColumn.Controls.Add(this.ProgressBarPanel);
             this.ProgressBarColumn.Controls.Add(this.ProgressTitlePanel);
             this.ProgressBarColumn.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -203,12 +201,19 @@
             // 
             // ProgressBarPanel
             // 
-            this.ProgressBarPanel.Controls.Add(this.ActiveProgressBarPanel);
-            this.ProgressBarPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProgressBarPanel.Location = new System.Drawing.Point(0, 30);
+            this.ProgressBarPanel.Location = new System.Drawing.Point(0, 61);
             this.ProgressBarPanel.Name = "ProgressBarPanel";
-            this.ProgressBarPanel.Size = new System.Drawing.Size(411, 320);
+            this.ProgressBarPanel.Size = new System.Drawing.Size(411, 289);
             this.ProgressBarPanel.TabIndex = 3;
+            // 
+            // ActiveProgressBarPanel
+            // 
+            this.ActiveProgressBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.ActiveProgressBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ActiveProgressBarPanel.Location = new System.Drawing.Point(0, 30);
+            this.ActiveProgressBarPanel.Name = "ActiveProgressBarPanel";
+            this.ActiveProgressBarPanel.Size = new System.Drawing.Size(411, 30);
+            this.ActiveProgressBarPanel.TabIndex = 0;
             // 
             // ProgressTitlePanel
             // 
@@ -231,6 +236,7 @@
             // 
             // TimeSpentColumn
             // 
+            this.TimeSpentColumn.Controls.Add(this.ActiveTimePanel);
             this.TimeSpentColumn.Controls.Add(this.TimeSpentPanel);
             this.TimeSpentColumn.Controls.Add(this.TimeSpentTitlePanel);
             this.TimeSpentColumn.Dock = System.Windows.Forms.DockStyle.Right;
@@ -241,12 +247,19 @@
             // 
             // TimeSpentPanel
             // 
-            this.TimeSpentPanel.Controls.Add(this.ActiveTimePanel);
-            this.TimeSpentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TimeSpentPanel.Location = new System.Drawing.Point(0, 30);
+            this.TimeSpentPanel.Location = new System.Drawing.Point(0, 61);
             this.TimeSpentPanel.Name = "TimeSpentPanel";
-            this.TimeSpentPanel.Size = new System.Drawing.Size(117, 320);
+            this.TimeSpentPanel.Size = new System.Drawing.Size(117, 289);
             this.TimeSpentPanel.TabIndex = 3;
+            // 
+            // ActiveTimePanel
+            // 
+            this.ActiveTimePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.ActiveTimePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ActiveTimePanel.Location = new System.Drawing.Point(0, 30);
+            this.ActiveTimePanel.Name = "ActiveTimePanel";
+            this.ActiveTimePanel.Size = new System.Drawing.Size(117, 30);
+            this.ActiveTimePanel.TabIndex = 0;
             // 
             // TimeSpentTitlePanel
             // 
@@ -269,6 +282,7 @@
             // 
             // NameColumn
             // 
+            this.NameColumn.Controls.Add(this.ActiveTitleNamePanel);
             this.NameColumn.Controls.Add(this.ProcessNamePanel);
             this.NameColumn.Controls.Add(this.TitlePanel);
             this.NameColumn.Dock = System.Windows.Forms.DockStyle.Left;
@@ -279,12 +293,19 @@
             // 
             // ProcessNamePanel
             // 
-            this.ProcessNamePanel.Controls.Add(this.ActiveTitleNamePanel);
-            this.ProcessNamePanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ProcessNamePanel.Location = new System.Drawing.Point(0, 30);
+            this.ProcessNamePanel.Location = new System.Drawing.Point(3, 61);
             this.ProcessNamePanel.Name = "ProcessNamePanel";
-            this.ProcessNamePanel.Size = new System.Drawing.Size(120, 320);
+            this.ProcessNamePanel.Size = new System.Drawing.Size(120, 289);
             this.ProcessNamePanel.TabIndex = 2;
+            // 
+            // ActiveTitleNamePanel
+            // 
+            this.ActiveTitleNamePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.ActiveTitleNamePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ActiveTitleNamePanel.Location = new System.Drawing.Point(0, 30);
+            this.ActiveTitleNamePanel.Name = "ActiveTitleNamePanel";
+            this.ActiveTitleNamePanel.Size = new System.Drawing.Size(120, 30);
+            this.ActiveTitleNamePanel.TabIndex = 0;
             // 
             // TitlePanel
             // 
@@ -377,30 +398,6 @@
             this.notifyIcon1.Text = "Process Tracker";
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // ActiveTimePanel
-            // 
-            this.ActiveTimePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ActiveTimePanel.Location = new System.Drawing.Point(0, 0);
-            this.ActiveTimePanel.Name = "ActiveTimePanel";
-            this.ActiveTimePanel.Size = new System.Drawing.Size(117, 30);
-            this.ActiveTimePanel.TabIndex = 0;
-            // 
-            // ActiveProgressBarPanel
-            // 
-            this.ActiveProgressBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ActiveProgressBarPanel.Location = new System.Drawing.Point(0, 0);
-            this.ActiveProgressBarPanel.Name = "ActiveProgressBarPanel";
-            this.ActiveProgressBarPanel.Size = new System.Drawing.Size(411, 30);
-            this.ActiveProgressBarPanel.TabIndex = 0;
-            // 
-            // ActiveTitleNamePanel
-            // 
-            this.ActiveTitleNamePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ActiveTitleNamePanel.Location = new System.Drawing.Point(0, 0);
-            this.ActiveTitleNamePanel.Name = "ActiveTitleNamePanel";
-            this.ActiveTitleNamePanel.Size = new System.Drawing.Size(120, 30);
-            this.ActiveTitleNamePanel.TabIndex = 0;
-            // 
             // TrackingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,15 +417,12 @@
             this.LogoPanel.PerformLayout();
             this.ListPanel.ResumeLayout(false);
             this.ProgressBarColumn.ResumeLayout(false);
-            this.ProgressBarPanel.ResumeLayout(false);
             this.ProgressTitlePanel.ResumeLayout(false);
             this.ProgressTitlePanel.PerformLayout();
             this.TimeSpentColumn.ResumeLayout(false);
-            this.TimeSpentPanel.ResumeLayout(false);
             this.TimeSpentTitlePanel.ResumeLayout(false);
             this.TimeSpentTitlePanel.PerformLayout();
             this.NameColumn.ResumeLayout(false);
-            this.ProcessNamePanel.ResumeLayout(false);
             this.TitlePanel.ResumeLayout(false);
             this.TitlePanel.PerformLayout();
             this.MainPanel.ResumeLayout(false);

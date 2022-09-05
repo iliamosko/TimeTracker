@@ -43,7 +43,8 @@ namespace TimeTracker
             InitializeComponent();
             start = DateTime.UtcNow;
             IntialSetup();
-            activeWindowTracker = new ActiveProcessListener(ProcessNamePanel, ProgressBarPanel, TimeSpentPanel);
+            activeWindowTracker = new ActiveProcessListener(ProcessNamePanel, ProgressBarPanel, TimeSpentPanel,
+                                                            ActiveTitleNamePanel, ActiveProgressBarPanel, ActiveTimePanel);
             StartTracking();
         }
 

@@ -19,16 +19,20 @@ namespace TimeTracker.Background
             ProcessTicker();
         }
 
-        public string GetActiveProcess()
+        public ActiveProcess GetActiveProcess()
         {
             if (currentActiveProc != null)
             {
-                return currentActiveProc.ProcessName;
+                return currentActiveProc;
             }
             return null;
         }
 
-
+        /// <summary>
+        /// Checks if the current process is being tracked
+        /// </summary>
+        /// <param name="processName">The Process name</param>
+        /// <returns>Returns true if process is being tracked, false otherwise</returns>
         public bool ContainsProcess(string processName)
         {
             return processContainer.Contains(processName);
@@ -49,14 +53,14 @@ namespace TimeTracker.Background
             if (currentActiveProc != null)
             {
                 currentActiveProc.Stop();
-
             }
 
             //PlaceInOrder(currentActiveProc);
             currentActiveProc = process;
             currentActiveProc.Start();
 
-            processContainer.Add(process); // add at the end to not mess with previous processes
+            processContainer.Add(process);
+            processContainer.SetActive(currentActiveProc);
         }
 
         // temp method REMOVE WHEN NOT NEEDED
@@ -65,15 +69,18 @@ namespace TimeTracker.Background
             processContainer.Add(process);
         }
 
-        public void ChangeActiveProcess(string processName)
+        public ActiveProcess GetProcessFromStorage(string processName)
         {
-            if (ContainsProcess(processName))
-            {
-                currentActiveProc.Stop();
-                //PlaceInOrder(currentActiveProc);
-                currentActiveProc = processContainer.Get(processName);
-                currentActiveProc.Start();
-            }
+            return processContainer.Get(processName);
+        }
+
+        public void ChangeActiveProcess(ActiveProcess process)
+        {
+            currentActiveProc.Stop();
+            //PlaceInOrder(currentActiveProc);
+            currentActiveProc = process;
+            currentActiveProc.Start();
+            processContainer.SetActive(currentActiveProc);
         }
 
         public void UpdateActiveProcessBar()
@@ -104,8 +111,8 @@ namespace TimeTracker.Background
                         progressBarPanel.Controls.SetChildIndex(allProcesses[j + 1].ProcessProgressPanel, betaIndex);
                         progressBarPanel.Controls.SetChildIndex(allProcesses[j].ProcessProgressPanel, alphaIndex);
 
-                        processNamePanel.Controls.SetChildIndex(allProcesses[j + 1].ProcessPanel, betaIndex);
-                        processNamePanel.Controls.SetChildIndex(allProcesses[j].ProcessPanel, alphaIndex);
+                        processNamePanel.Controls.SetChildIndex(allProcesses[j + 1].ProcessNamePanel, betaIndex);
+                        processNamePanel.Controls.SetChildIndex(allProcesses[j].ProcessNamePanel, alphaIndex);
 
                         timeSpentPanel.Controls.SetChildIndex(allProcesses[j + 1].ProcessTimePanel, betaIndex);
                         timeSpentPanel.Controls.SetChildIndex(allProcesses[j].ProcessTimePanel, alphaIndex);

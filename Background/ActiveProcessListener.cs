@@ -14,6 +14,10 @@ namespace TimeTracker.Background
         Panel processNamePanel;
         Panel progressBarPanel;
         Panel timeSpentPanel;
+        Panel activeProcessNamePanel;
+        Panel activeProgressBarPanel;
+        Panel activeTimeSpentPanel;
+
         public ProcessManager processManager;
 
         [DllImport("user32.dll")]
@@ -21,11 +25,16 @@ namespace TimeTracker.Background
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
-        public ActiveProcessListener(Panel processNamePanel, Panel progressBarPanel, Panel timeSpentPanel)
+        public ActiveProcessListener(Panel processNamePanel, Panel progressBarPanel, Panel timeSpentPanel,
+            Panel activeProcessNamePanel, Panel activeProgressBarPanel, Panel activeTimeSpentPanel)
         {
             this.processNamePanel = processNamePanel;
             this.progressBarPanel = progressBarPanel;
             this.timeSpentPanel = timeSpentPanel;
+            this.activeProcessNamePanel = activeProcessNamePanel;
+            this.activeProgressBarPanel = activeProgressBarPanel;
+            this.activeTimeSpentPanel = activeTimeSpentPanel;
+
             processManager = new ProcessManager();
         }
 
@@ -45,23 +54,52 @@ namespace TimeTracker.Background
 
         void AddProcess(string processName)
         {
-            var proc = new ActiveProcess(processName, processNamePanel, progressBarPanel, timeSpentPanel);
-            processManager.AddProcess(proc);
+            var proc = new ActiveProcess(processName, processNamePanel, progressBarPanel, timeSpentPanel); // ActiveProcess should not have panel dependencies
+            var activeProc = processManager.GetActiveProcess();
+
+            if (activeProc != null)
+            {
+                SetInactivePanels(activeProc);
+                processManager.ChangeActiveProcess(proc);
+                SetActivePanels(proc);
+            }
+            else
+            {
+                SetActivePanels(proc);
+                processManager.AddProcess(proc);
+            }
         }
 
         void UpdateProcess(string processName)
         {
+            var activeProcess = processManager.GetActiveProcess();
             //look at processtracker, this needs to update the timers for the active processes
-            if (!processName.Equals(processManager.GetActiveProcess()))
+            if (!processName.Equals(activeProcess.ProcessName))
             {
                 // change active process
-                processManager.ChangeActiveProcess(processName); 
+                SetInactivePanels(activeProcess);
+                processManager.ChangeActiveProcess(processManager.GetProcessFromStorage(processName));
+                SetActivePanels(processManager.GetActiveProcess());
                 processManager.UpdateActiveProcessBar();
             }
             else
             {
                 processManager.UpdateActiveProcessBar();
             }
+        }
+
+        private void SetActivePanels(ActiveProcess proc)
+        {
+            activeProcessNamePanel.Controls.Add(proc.ProcessNamePanel);
+            activeProgressBarPanel.Controls.Add(proc.ProcessProgressPanel);
+            activeTimeSpentPanel.Controls.Add(proc.ProcessTimePanel);
+        }
+
+        private void SetInactivePanels(ActiveProcess proc)
+        {
+            processNamePanel.Controls.Add(proc.ProcessNamePanel);
+            progressBarPanel.Controls.Add(proc.ProcessProgressPanel);
+            timeSpentPanel.Controls.Add(proc.ProcessTimePanel);
         }
 
         private string GetActiveWindowTitle()

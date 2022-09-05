@@ -9,6 +9,8 @@ namespace TimeTracker.Containers
     {
         List<ActiveProcess> Storage;
 
+        public ActiveProcess CurrentActive { get; private set; }
+
         public ProcessContainer()
         {
             Storage = new List<ActiveProcess>();
@@ -34,9 +36,27 @@ namespace TimeTracker.Containers
             return false;
         }
 
+        public void SetActive(ActiveProcess process)
+        {
+            if (CurrentActive is null)
+            {
+                if (Contains(process.ProcessName))
+                {
+                    CurrentActive = process;
+                    Storage.Remove(process); // Remove from the storage as it is currently in use.
+                }
+            } 
+            else
+            {
+                Storage.Add(CurrentActive);
+                CurrentActive = process;
+                Storage.Remove(process);
+            }
+        }
+
         public ActiveProcess Get(ActiveProcess item)
         {
-            throw new NotImplementedException();
+            return Get(item.ProcessName);
         }
 
         public ActiveProcess Get(string processName)
@@ -57,7 +77,17 @@ namespace TimeTracker.Containers
         /// <param name="processName">The name of the process</param>
         /// <returns>True if process is found, False otherwise</returns>
         public bool Contains(string processName)
-        {
+        {            
+            //Check active process
+            if (CurrentActive != null)
+            {
+                if (CurrentActive.ProcessName.Equals(processName))
+                {
+                    return true;
+                }
+            }
+
+            // Check storage
             foreach (var proc in Storage)
             {
                 if (proc.ProcessName == processName)

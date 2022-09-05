@@ -18,7 +18,7 @@ namespace TimeTracker.Entities
         Label timeSpent;
         ProgressBar processBar;
 
-        public Panel ProcessPanel { get; set; }
+        public Panel ProcessNamePanel { get; set; }
 
         public Panel ProcessProgressPanel { get; set; }
 
@@ -69,7 +69,7 @@ namespace TimeTracker.Entities
 
         void CreateNamePanel(Panel processNamePanel)
         {
-            ProcessPanel = new Panel
+            ProcessNamePanel = new Panel
             {
                 Size = new Size(120, 30),
                 Dock = DockStyle.Top
@@ -82,8 +82,8 @@ namespace TimeTracker.Entities
                 Location = new Point(32, 10)
             };
 
-            ProcessPanel.Controls.Add(processLabel);
-            processNamePanel.Controls.Add(ProcessPanel);
+            ProcessNamePanel.Controls.Add(processLabel);
+            //processNamePanel.Controls.Add(ProcessPanel);
         }
 
         void CreateProgressPanel(Panel progressBarPanel)
@@ -102,7 +102,7 @@ namespace TimeTracker.Entities
             };
 
             ProcessProgressPanel.Controls.Add(processBar);
-            progressBarPanel.Controls.Add(ProcessProgressPanel);
+            //progressBarPanel.Controls.Add(ProcessProgressPanel);
         }
 
         void CreateTimePanel(Panel timeSpentPanel)
@@ -121,7 +121,7 @@ namespace TimeTracker.Entities
             };
 
             ProcessTimePanel.Controls.Add(timeSpent);
-            timeSpentPanel.Controls.Add(ProcessTimePanel);
+            //timeSpentPanel.Controls.Add(ProcessTimePanel);
         }
     }
 }
