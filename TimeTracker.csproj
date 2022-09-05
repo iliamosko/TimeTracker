@@ -46,27 +46,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Landing.cs">
+    <Compile Include="Background\ActiveProcessListener.cs" />
+    <Compile Include="Background\ProcessListUpdater.cs" />
+    <Compile Include="Background\ProcessManager.cs" />
+    <Compile Include="Background\ProgressBarWorker.cs" />
+    <Compile Include="Containers\ProcessContainer.cs" />
+    <Compile Include="Entities\ActiveProcess.cs" />
+    <Compile Include="Interfaces\IStorage.cs" />
+    <Compile Include="Pages\Landing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Landing.Designer.cs">
+    <Compile Include="Pages\Landing.Designer.cs">
       <DependentUpon>Landing.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tracking.cs">
+    <Compile Include="Pages\Tracking.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tracking.Designer.cs">
+    <Compile Include="Pages\Tracking.Designer.cs">
       <DependentUpon>Tracking.cs</DependentUpon>
     </Compile>
     <Compile Include="ProcessTracker.cs" />
     <Compile Include="ProcessUpdater.cs" />
-    <Compile Include="TrackingProcess.cs" />
+    <Compile Include="Entities\TrackingProcess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Landing.resx">
+    <Compile Include="TrackingPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrackingPage.Designer.cs">
+      <DependentUpon>TrackingPage.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\Landing.resx">
       <DependentUpon>Landing.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tracking.resx">
+    <EmbeddedResource Include="Pages\Tracking.resx">
       <DependentUpon>Tracking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -77,7 +90,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TrackingPage.resx">
+      <DependentUpon>TrackingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -90,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

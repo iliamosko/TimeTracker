@@ -20,6 +20,7 @@ namespace TimeTracker
             this.Hide();
             var form2 = new Tracking();
             form2.Show();
+            //Dispose();
         }
 
         private void button3_Click(object sender, EventArgs e)

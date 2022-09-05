@@ -11,10 +11,17 @@ namespace TimeTracker
 
         private TrackingProcess CurrentActiveProcess;
 
+        private TrackingProcess PreviousActiveProcess;
+
         public ProcessUpdater()
         {
             Processes = new List<TrackingProcess>();
             ProcessTicker();
+        }
+
+        public int TotalTrackedProcess()
+        {
+            return Processes.Count();
         }
 
         /// <summary>
@@ -41,6 +48,11 @@ namespace TimeTracker
         /// <returns>returns <see cref="True"/> if process exists, <see cref="False"/> otherwise</returns>
         public bool HasProcess(string proc)
         {
+            if(proc is null)
+            {
+                return false;
+            }
+            
             if(Processes.Exists(process => process.ProcessName.Equals(proc)))
             {
                 return true;
@@ -89,13 +101,9 @@ namespace TimeTracker
             else if (CurrentActiveProcess.ProcessName != proc.ProcessName)
             {
                 CurrentActiveProcess.StopStopwatch();
+                PreviousActiveProcess = CurrentActiveProcess;
                 CurrentActiveProcess = proc;
                 CurrentActiveProcess.StartStopwatch();
-            }
-            else
-            {
-                CurrentActiveProcess.StopStopwatch();
-                CurrentActiveProcess = proc;
             }
         }
 
@@ -139,13 +147,46 @@ namespace TimeTracker
                     trackingProcess.UpdateTime();
                 }
             }
+            SortAndSwap();
+            //SwapProcess();
         }
 
-        private void ProcessSwap()
+        private void SortAndSwap()
         {
+            var sortedProcesses = Processes.OrderByDescending(proc => proc.GetProgressBarLength()).ToList();
+            Console.WriteLine(Processes.First().ProcessName);
+            Console.WriteLine(sortedProcesses.First().ProcessName);
 
+            if (!sortedProcesses.SequenceEqual(Processes))
+            {
+                var x = sortedProcesses.First();
+                var t = Processes.First();
+                t.Swap(x);
+            }
+            //Processes = sortedProcesses;
+            Console.WriteLine(Processes.First().ProcessName);
         }
 
+        private void SwapProcess()
+        {
+            if(!(PreviousActiveProcess is null))
+            {
+                if (CurrentActiveProcess.GetProgressBarLength() > PreviousActiveProcess.GetProgressBarLength())
+                {
+                    // Perform swapping operation
+                    string tempName = PreviousActiveProcess.ProcessName;
+                    int tempLength = PreviousActiveProcess.GetProgressBarLength();
 
+                    PreviousActiveProcess.ProcessName = CurrentActiveProcess.ProcessName;
+                    PreviousActiveProcess.SetProgressBarValue(CurrentActiveProcess.GetProgressBarLength());
+
+                    CurrentActiveProcess.ProcessName = tempName;
+                    CurrentActiveProcess.SetProgressBarValue(tempLength);
+
+                    CurrentActiveProcess = PreviousActiveProcess;
+                    //PreviousActiveProcess = CurrentActiveProcess;
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -30,18 +31,26 @@ namespace TimeTracker
         {
             var activeProcess = GetActiveWindowTitle();
 
-            if (!ProcessUpdater.ContainsProcesses())
+
+            if (!activeProcess.Equals("My Tracking Application"))
             {
-                AddProcessToList(activeProcess,false);
-            }
-            else if(!ProcessUpdater.HasProcess(activeProcess))
-            {
-                // add a new process to the list of processes
-                AddProcessToList(activeProcess, true);
-            }
-            else
-            {
-                UpdateProcesses(activeProcess);
+                //var t = activeProcess.LastIndexOf("-") + 2;
+                //var j = activeProcess.Substring(t, activeProcess.Length - t);
+                //Console.WriteLine(j);
+
+                if (!ProcessUpdater.ContainsProcesses())
+                {
+                    AddProcessToList(activeProcess, false);
+                }
+                else if (!ProcessUpdater.HasProcess(activeProcess))
+                {
+                    // add a new process to the list of processes
+                    AddProcessToList(activeProcess, true);
+                }
+                else
+                {
+                    UpdateProcesses(activeProcess);
+                }
             }
         }
 
@@ -68,12 +77,12 @@ namespace TimeTracker
             if (newProcess)
             {
                 InitialPoint = new Point(InitialPoint.X, InitialPoint.Y + ProcessUpdater.LastAddedProcess().GetProcessBarHeight() + 5);
-                var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
+                var process = new TrackingProcess(ProcessName, panelControls, InitialPoint, ProcessUpdater.TotalTrackedProcess());
                 ProcessUpdater.AddProcess(process);
             }
             else
             {
-                var process = new TrackingProcess(ProcessName, panelControls, InitialPoint);
+                var process = new TrackingProcess(ProcessName, panelControls, InitialPoint, ProcessUpdater.TotalTrackedProcess());
                 ProcessUpdater.AddProcess(process);
             }
         }
@@ -86,6 +95,12 @@ namespace TimeTracker
 
             if (GetWindowText(handle, Buff, nChars) > 0)
             {
+                //string buffString = Buff.ToString();
+                //string trimmedString = String.Concat(buffString.Where(c => !Char.IsWhiteSpace(c)));
+                //string[] windowTitleArray = trimmedString.Split('-');
+                //string windowTitle = windowTitleArray[windowTitleArray.Length - 1] + windowTitleArray[windowTitleArray.Length - 2];
+
+                //return windowTitle;
                 return Buff.ToString();
             }
             return null;

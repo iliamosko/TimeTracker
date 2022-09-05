@@ -11,6 +11,9 @@ namespace TimeTracker
 
         public static TimeSpan TimeDifference;
 
+        /// <summary>
+        /// This is where the program starts. 
+        /// </summary>
         public Tracking()
         {
             start = DateTime.UtcNow;
@@ -45,6 +48,11 @@ namespace TimeTracker
             label2.Text = $"{hours:00}:{minutes:00}:{seconds:00}";
 
             ProcessTracker.TrackProcess();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
